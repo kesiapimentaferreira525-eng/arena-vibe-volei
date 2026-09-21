@@ -4,7 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+		"arena_vibe_volei.api",
+		"Controller",
+		"Service"
+})
 @EntityScan(basePackages = "Model")
 public class ApiApplication {
 

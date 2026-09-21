@@ -5,6 +5,7 @@ import Model.Reserva;
 import arena_vibe_volei.api.Dto.DisponibilidadeDTO;
 import arena_vibe_volei.api.Dto.QuadraRequestDTO;
 import arena_vibe_volei.api.Dto.QuadraResponseDTO;
+import arena_vibe_volei.api.Dto.QuadraCadastroDTO;
 import arena_vibe_volei.api.Dto.ReservaResponseDTO;
 import arena_vibe_volei.api.Enum.StatusPagamento;
 import arena_vibe_volei.api.Enum.StatusQuadra;
@@ -45,6 +46,22 @@ public class QuadraService {
         return quadraRepository.findAll().stream()
                 .map(this::converterParaDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Quadra cadastrarQuadra(QuadraCadastroDTO dto) {
+        if (dto == null || dto.getNome() == null || dto.getNome().isBlank()) {
+            throw new IllegalArgumentException("Informe o nome da quadra");
+        }
+        if (dto.getValorHora() == null || dto.getValorHora().signum() <= 0) {
+            throw new IllegalArgumentException("Informe um valor de hora maior que zero");
+        }
+
+        Quadra quadra = new Quadra();
+        quadra.setNome(dto.getNome().trim());
+        quadra.setValorHora(dto.getValorHora());
+        quadra.setStatus(StatusQuadra.LIVRE);
+        return quadraRepository.save(quadra);
     }
 
     @Transactional
@@ -325,6 +342,7 @@ public class QuadraService {
         response.setMinutosExcedentes(reserva.getMinutosExcedentes());
         response.setTaxaHoraExtra(reserva.getTaxaHoraExtra());
         response.setValorTotal(reserva.getValorTotal());
+        response.setCanceladaEm(reserva.getCanceladaEm());
         return response;
     }
 }

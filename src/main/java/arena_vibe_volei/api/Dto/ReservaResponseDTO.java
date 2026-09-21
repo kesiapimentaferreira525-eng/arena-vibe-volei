@@ -19,6 +19,7 @@ public class ReservaResponseDTO {
     private long minutosExcedentes;
     private BigDecimal taxaHoraExtra;
     private BigDecimal valorTotal;
+    private LocalDateTime canceladaEm;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -44,4 +45,6 @@ public class ReservaResponseDTO {
     public void setTaxaHoraExtra(BigDecimal taxaHoraExtra) { this.taxaHoraExtra = taxaHoraExtra; }
     public BigDecimal getValorTotal() { return valorTotal; }
     public void setValorTotal(BigDecimal valorTotal) { this.valorTotal = valorTotal; }
+    public LocalDateTime getCanceladaEm() { return canceladaEm; }
+    public void setCanceladaEm(LocalDateTime canceladaEm) { this.canceladaEm = canceladaEm; }
 }

@@ -5,6 +5,7 @@ import Model.Quadra;
 import Service.QuadraService;
 import arena_vibe_volei.api.Dto.DisponibilidadeDTO;
 import arena_vibe_volei.api.Dto.QuadraRequestDTO;
+import arena_vibe_volei.api.Dto.QuadraCadastroDTO;
 import arena_vibe_volei.api.Dto.ReservaResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
@@ -18,6 +19,11 @@ public class QuadraController {
 
     @Autowired
     private QuadraService quadraService;
+
+    @PostMapping
+    public ResponseEntity<Quadra> cadastrar(@RequestBody QuadraCadastroDTO dto) {
+        return ResponseEntity.ok(quadraService.cadastrarQuadra(dto));
+    }
 
     @PostMapping("/{id}/iniciar")
     public ResponseEntity<Quadra> iniciarReserva(@PathVariable Long id, @RequestBody QuadraRequestDTO dto) {
